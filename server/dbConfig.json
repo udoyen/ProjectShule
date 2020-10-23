@@ -1,0 +1,9 @@
+{
+    "database":{
+        "host": "localhost",
+        "user": "root",
+        "password": "root",
+        "database": "shule_db"
+    },
+    "secret": "MY SECRET CODE USED TO VERIFY JWT TOKENS" 
+}
