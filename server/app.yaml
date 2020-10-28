@@ -6,7 +6,7 @@ instance_class: F1
 env_variables:
   DB_HOST: 10.114.208.2
   DB_USER: admin
-  DB_PASS: XXXXXXle-XXXX-aXXXX
+  DB_PASS: shule-1234-adminOPE#$*#
   DB_NAME: shule_db
   DB_PORT: 3306
   DB_CONNECTION_NAME: gads-app-demo:us-central1:shule-db
