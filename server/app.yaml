@@ -9,7 +9,8 @@ env_variables:
   DB_PASS: shule-1234-admin
   DB_NAME: shule_db
   DB_PORT: 3306
-  CLOUD_SQL_CONNECTION_NAME: gads-app-demo:shule_db:shule-db
+  DB_SOCKET_PATH: "/cloudsql/gads-app-demo:us-central1:shule-db"
+  CLOUD_SQL_CONNECTION_NAME: gads-app-demo:us-central1:shule-db
 
 beta_settings:
   cloud_sql_instances: gads-app-demo:shule-db:shule-db:3306

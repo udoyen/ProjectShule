@@ -35,7 +35,6 @@ async function initialize() {
             user: process.env.DB_USER, 
             password: process.env.DB_PASS,
             database: process.env.DB_NAME,
-            socketPath: process.env.SOCKET_PATH,
             port: process.env.DB_PORT
         });
         
@@ -45,7 +44,18 @@ async function initialize() {
                 }
                 connection.query(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME}\`;`, () => {
                     //connect to db
-                    const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, { dialect: 'mysql' });
+                    const sequelize = new Sequelize(
+                        process.env.DB_NAME, 
+                        process.env.DB_USER, 
+                        process.env.DB_PASS, 
+                        { 
+                            dialect: 'mysql',
+                            host: '/cloudsql/shule-db',
+                            timestamps: false,
+                            dialectOptions: {
+                                socketPath: '/cloudsql/shule-db'
+                            } 
+                        });
                     
                     //init models and add them to the exported db object
                     db.students =  require('../routes/student/student.model')(sequelize);
