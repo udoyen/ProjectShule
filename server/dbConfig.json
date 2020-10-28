@@ -1,9 +1,11 @@
 {
-    "database":{
-        "host": "localhost",
-        "user": "root",
-        "password": "root",
-        "database": "shule_db"
+    "database": {
+        "host": "10.114.208.2",
+        "user": "admin",
+        "password": "shule-1234-admin",
+        "database": "shule_db",
+        "socketPath": "/cloudsql/gads-app-demo:us-central1:shule-db",
+        "port": "3306"
     },
-    "secret": "MY SECRET CODE USED TO VERIFY JWT TOKENS" 
+    "secret": "MY SECRET CODE USED TO VERIFY JWT TOKENS"
 }

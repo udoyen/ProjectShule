@@ -1,0 +1,27 @@
+runtime: nodejs12
+
+instance_class: F1
+
+
+env_variables:
+  DB_HOST: 10.114.208.2
+  DB_USER: admin
+  DB_PASS: shule-1234-admin
+  DB_NAME: shule_db
+  DB_PORT: 3306
+  CLOUD_SQL_CONNECTION_NAME: gads-app-demo:shule_db:shule-db
+
+beta_settings:
+  cloud_sql_instances: gads-app-demo:shule-db:shule-db:3306
+
+vpc_access_connector:
+  name: projects/gads-app-demo/locations/us-central1/connectors/shule-app-connector
+
+automatic_scaling:
+  target_cpu_utilization: 0.80
+  min_instances: 1
+  max_instances: 3
+  min_pending_latency: 30ms
+  max_pending_latency: automatic
+  max_concurrent_requests: 50
+
