@@ -18,6 +18,6 @@ app.use('/parent', require('./routes/parent/parentController'));
 app.use(errorHandler);
 
 //start server
-const port = process.env.NODE === 'production' ? (process.env.PORT || 80): 3000;
+const port = process.env.NODE === 'production' ? (process.env.PORT || 8080): 8080;
 
 app.listen(port, ()=> console.log("Listening  on port " + port));
