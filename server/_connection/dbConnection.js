@@ -31,18 +31,19 @@ async function initialize() {
     //     });
         
         const pool = await mysql.createPool({
-            host: process.env.DB_HOST, 
-            user: process.env.DB_USER, 
-            password: process.env.DB_PASS,
-            database: process.env.DB_NAME,
-            port: process.env.DB_PORT
+            host: "localhost", 
+            user: "root", 
+            password: "admin",            
+            port: "3306",
+            waitForConnections: true
+            
         });
 
         const ensureSchema = async (pool) => {
-            await pool.query(
-                `CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME};`
-            );
             console.log(`Ensured that table 'shule_db' exists`);
+            await pool.query(
+                `CREATE DATABASE IF NOT EXISTS shule_db;`
+            );
         };
       
         const poolPromise = ensureSchema(pool)
@@ -50,12 +51,12 @@ async function initialize() {
                 console.log(`Doing database creation`);
                  //connect to db
                  const sequelize = new Sequelize(
-                    process.env.DB_NAME, 
-                    process.env.DB_USER, 
-                    process.env.DB_PASS, 
+                    "shule_db", 
+                    "root", 
+                    "admin", 
                     { 
                         dialect: 'mysql',
-                        host: process.env.DB_HOST                       
+                        host: "localhost"
                         
                     });
                 
@@ -70,7 +71,7 @@ async function initialize() {
                 sequelize.sync();
             })
             .catch((err) => {
-                console.log(`Error: ${err}`)
+                console.log(`${err}`)
             });
 
             poolPromise;
