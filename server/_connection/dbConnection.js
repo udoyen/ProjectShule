@@ -31,10 +31,10 @@ async function initialize() {
     //     });
         
         const pool = await mysql.createPool({
-            host: "localhost", 
-            user: "root", 
-            password: "admin",            
-            port: "3306",
+            host: "172.17.0.3", 
+            user: "dbuser", 
+            password: "dbuser",
+            port: "3306",       
             waitForConnections: true
             
         });
@@ -52,11 +52,11 @@ async function initialize() {
                  //connect to db
                  const sequelize = new Sequelize(
                     "shule_db", 
-                    "root", 
-                    "admin", 
+                    "dbuser", 
+                    "dbuser", 
                     { 
                         dialect: 'mysql',
-                        host: "localhost"
+                        host: "172.17.0.3"
                         
                     });
                 
