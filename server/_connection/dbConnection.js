@@ -31,9 +31,9 @@ async function initialize() {
     //     });
         
         const pool = await mysql.createPool({
-            host: "172.17.0.3", 
-            user: "dbuser", 
-            password: "dbuser",
+            host: "localhost", 
+            user: "developer", 
+            password: "shule34HEdfer",
             port: "3306",       
             waitForConnections: true
             
@@ -52,11 +52,11 @@ async function initialize() {
                  //connect to db
                  const sequelize = new Sequelize(
                     "shule_db", 
-                    "dbuser", 
-                    "dbuser", 
+                    "developer", 
+                    "shule34HEdfer", 
                     { 
                         dialect: 'mysql',
-                        host: "172.17.0.3"
+                        host: "localhost"
                         
                     });
                 
