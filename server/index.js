@@ -2,7 +2,7 @@ require("rootpath")();
 require("@google-cloud/debug-agent").start({
   serviceContext: { enableCanary: false },
 });
-require("@google-cloud/profiler").start();
+// require("@google-cloud/profiler").start();
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -21,6 +21,6 @@ app.use("/parent", require("./routes/parent/parentController"));
 app.use(errorHandler);
 
 //start server
-const port = process.env.NODE === "production" ? process.env.PORT || 80 : 3000;
+const port = process.env.NODE === "production" ? process.env.PORT || 80 : 8080;
 
 app.listen(port, () => console.log("Listening  on port " + port));

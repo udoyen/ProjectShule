@@ -20,10 +20,6 @@ handlers:
 beta_settings:
   cloud_sql_instances: gads-app-demo:us-central1:demo-db-10:shule_db:3306
 
-network:
-  instance_tag: shule-backend
-  name: deploy-network
-
 vpc_access_connector:
   name: projects/gads-app-demo/locations/us-central1/connectors/app-to-cloud-sql
 
