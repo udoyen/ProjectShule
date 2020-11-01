@@ -2,13 +2,15 @@ runtime: nodejs12
 
 instance_class: F4
 
+service: shule-backend
+
 env_variables:
-  DB_HOST: 10.103.32.5
+  DB_HOST: 10.38.64.2
   DB_USER: developer
   DB_PASS: shule34HEdfer
   DB_NAME: shule_db
   DB_PORT: 3306
-  DB_CONNECTION_NAME: team-mysql-db:us-central1:shule-db-vs-8
+  DB_CONNECTION_NAME: gads-app-demo:us-central1:demo-db-10
  
 handlers:
 - url: /.*
@@ -16,10 +18,14 @@ handlers:
   script: auto
 
 beta_settings:
-  cloud_sql_instances: team-mysql-db:shule-db-vs-8:shule_db:3306
+  cloud_sql_instances: gads-app-demo:us-central1:demo-db-10:shule_db:3306
+
+network:
+  instance_tag: shule-backend
+  name: deploy-network
 
 vpc_access_connector:
-  name: projects/team-mysql-db/locations/us-central1/connectors/the-vpc-connector
+  name: projects/gads-app-demo/locations/us-central1/connectors/app-to-cloud-sql
 
 automatic_scaling:
   target_cpu_utilization: 0.80

@@ -9,35 +9,17 @@ module.exports = db = {
 };
 
 async function initialize() {
-  // create db if it doesn't already exist
-  // const { host, user, password, database, socketPath, port } = config.database;
-  // const connection = await mysql.createConnection(
-  //     {
-  //         host: process.env.DB_HOST,
-  //         user: process.env.DB_USER,
-  //         password: process.env.DB_PASS,
-  //         database: process.env.DB_NAME,
-  //         socketPath: process.env.SOCKET_PATH,
-  //         port: process.env.DB_PORT
-
-  //     });
-  //     await connection.connect((err) => {
-  //         if(err) {
-  //             console.log(err.code);
-  //             console.log(err.fatal);
-  //         }
-  //     });
-
+  // create db if it doesn't already exisT
   const pool = await mysql.createPool({
-    host: "localhost",
-    user: "developer",
-    password: "shule34HEdfer",
-    port: "3306",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    port: process.env.PORT,
     waitForConnections: true,
   });
 
   const ensureSchema = async (pool) => {
-    console.log(`Ensured that table 'shule_db' exists`);
+    console.log(`Ensured that table ${process.env.DB_NAME} exists`);
     await pool.query(`CREATE DATABASE IF NOT EXISTS shule_db;`);
   };
 
@@ -46,12 +28,12 @@ async function initialize() {
       console.log(`Doing database creation`);
       //connect to db
       const sequelize = new Sequelize(
-        "shule_db",
-        "developer",
-        "shule34HEdfer",
+        process.env.DB_NAME,
+        process.env.DB_USER,
+        process.env.DB_PASS,
         {
           dialect: "mysql",
-          host: "localhost",
+          host: process.env.DB_HOST,
         }
       );
 
