@@ -21,8 +21,8 @@ steps:
   args: ['app', 'deploy']
   dir: './server'
 - name: 'gcr.io/cloud-builders/gcloud'
-  id: 'frontend'
-  entrypoint: 'gcloud'
+  id: 'deploy-frontend'
+  entrypoint: 'bash'
   dir: './frontend'
   args:
     - '-c'
@@ -31,7 +31,7 @@ steps:
         then 
              echo "Depoying frontend!"
              echo " "
-             app deploy
+             gcloud app deploy
         else
              echo "Frontend not setup yet!"
              echo " "
