@@ -1,17 +1,23 @@
 steps:
 - name: node
+  id: 'node-install'
   entrypoint: bash
   args:
     - '-c'
     - |
        if [[ -d ./server ]] && [[ -d ./frontend ]];
        then
+            echo "Both frontend and backend directories are present!"
+            echo " "
             npm install ./server
             npm install ./frontend
        else
+            echo "Only backend folder is presnet!"
+            echo " "
             npm install ./server
        fi
 - name: 'gcr.io/cloud-builders/gcloud'
+  id: 'deploy-backend'
   args: ['app', 'deploy']
   dir: './server'
 
