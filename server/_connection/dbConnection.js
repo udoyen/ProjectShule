@@ -14,13 +14,18 @@ async function initialize() {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
     port: process.env.PORT,
     waitForConnections: true,
   });
 
   const ensureSchema = async (pool) => {
     console.log(`Ensured that table ${process.env.DB_NAME} exists`);
-    await pool.query(`CREATE DATABASE IF NOT EXISTS shule_db;`);
+    await pool
+      .query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME};`)
+      .catch((err) => {
+        console.log(`Create error: ${err}`);
+      });
   };
 
   const poolPromise = ensureSchema(pool)
@@ -46,7 +51,7 @@ async function initialize() {
       sequelize.sync();
     })
     .catch((err) => {
-      console.log(`${err}`);
+      console.log(`Lower errro: ${err}`);
     });
 
   poolPromise;
