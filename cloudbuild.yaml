@@ -1,5 +1,5 @@
 steps:
-- name: 'gcr.io/gcloud-builders/node'
+- name: 'node12'
   entrypoint: npm
   args:
     - "bash"
