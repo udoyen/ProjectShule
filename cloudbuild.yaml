@@ -20,7 +20,7 @@ steps:
   id: 'deploy-backend'
   args: ['app', 'deploy']
   dir: './server'
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+- name: 'gcr.io/cloud-builders/gcloud'
   id: 'frontend'
   entrypoint: 'gcloud'
   dir: './frontend'
