@@ -1,8 +1,13 @@
 steps:
-- name: node
-  entrypoint: npm
-  args: ['install']
-  dir: './server'
+- name: 'gcr.io/cloud-builders/node'
+  entrypoint: bash
+  args:
+    - '-c'
+    - |
+       if [[ -d ./server ]];
+       then
+            npm install ./server
+       fi
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy']
   dir: './server'
