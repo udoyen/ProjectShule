@@ -22,7 +22,7 @@ steps:
   dir: './server'
 - name: 'gcr.io/cloud-builders/gcloud'
   id: 'deploy-frontend'
-  entrypoint: 'bash'
+  entrypoint: 'sh'
   dir: './frontend'
   args:
     - '-c'
