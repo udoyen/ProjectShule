@@ -1,5 +1,5 @@
 steps:
-- name: 'gcr.io/cloud-builders/node'
+- name: node
   entrypoint: bash
   args:
     - '-c'
