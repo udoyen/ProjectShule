@@ -1,19 +1,10 @@
 steps:
-- name: 'node12'
+- name: node
   entrypoint: npm
-  args:
-    - "bash"
-    - "-c"
-    - |
-        if [[ -d ./server ]] && [[ -d ./frontend ]];
-        then
-              npm install ./server && \
-              npm install ./frontend && \
-              gcloud app deploy ./frontend/app.yaml && \
-              gcloud app deploy ./server/app.yaml
-        else
-              npm install ./server && \
-              gcloud app deploy ./server/app.yaml
-        fi
+  args: ['install']
+  dir: './server'
+- name: 'gcr.io/gcloud-builders/gcloud'
+  args: ['app', 'deploy']
+  dir: './server'
 
 timeout: "1600s"
