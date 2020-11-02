@@ -20,5 +20,20 @@ steps:
   id: 'deploy-backend'
   args: ['app', 'deploy']
   dir: './server'
-
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  id: 'frontend'
+  entrypoint: 'gcloud'
+  dir: './frontend'
+  args:
+    - '-c'
+    - | 
+        if [[ -d ./frontend ]];
+        then 
+             echo "Depoying frontend!"
+             echo " "
+             app deploy
+        else
+             echo "Frontend not setup yet!"
+             echo " "
+        fi
 timeout: "1600s"
