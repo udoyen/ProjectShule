@@ -4,8 +4,11 @@ steps:
   args:
     - '-c'
     - |
-       if [[ -d ./server ]];
+       if [[ -d ./server ]] && [[ -d ./frontend ]];
        then
+            npm install ./server
+            npm install ./frontend
+       else
             npm install ./server
        fi
 - name: 'gcr.io/cloud-builders/gcloud'
