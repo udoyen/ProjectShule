@@ -1,7 +1,7 @@
 steps:
 - name: node
   id: 'node-install'
-  entrypoint: bash
+  entrypoint: sh
   args:
     - '-c'
     - |
