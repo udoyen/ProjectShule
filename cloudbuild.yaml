@@ -1,18 +1,19 @@
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
+  entrypoint: npm
   args:
+    - "bash"
     - "-c"
     - |
-        if [[ -d ./frontend ]] && [[ -d ./server ]]; 
+        if [[ -d ./server ]] && [[ -d ./frontend ]];
         then
-               npm install ./server && \
-               npm install ./frontend && \
-               gcloud app deploy ./frontend/app.yaml && \
-               gcloud app deploy ./server/app.yaml
+              npm install ./server && \
+              npm install ./frontend && \
+              gcloud app deploy ./frontend/app.yaml && \
+              gcloud app deploy ./server/app.yaml
         else
-               npm install ./server && \
-               gcloud app deploy ./server/app.yaml
+              npm install ./server && \
+              gcloud app deploy ./server/app.yaml
         fi
 
 timeout: "1600s"
