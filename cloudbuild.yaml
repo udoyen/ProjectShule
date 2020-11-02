@@ -3,7 +3,7 @@ steps:
   entrypoint: npm
   args: ['install']
   dir: './server'
-- name: 'gcr.io/gcloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy']
   dir: './server'
 
