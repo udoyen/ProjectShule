@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  db:
+     container_name: shule-db
+     image: mysql:8.0
+     network_mode: host
+     ports:
+       - "15000:3306"
+     command: --default-authentication-plugin=mysql_native_password
+     restart: unless-stopped
+     environment:
+        MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+        MYSQL_DATABASE_FILE: /run/secrets/mysql_database
+        MYSQL_USER_FILE: /run/secrets/mysql_user
+        MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+     secrets:
+       - mysql_root_password
+       - mysql_database
+       - mysql_user
+       - mysql_password
+
+  shule-backend:
+     build: 
+        context: .
+        dockerfile: Dockerfile
+     container_name: shule-backend
+     image: shule-backend:backend
+     restart: unless-stopped
+     depends_on:
+       - db
+     links:
+       - db:db
+
+secrets:
+  mysql_root_password:
+    file: /home/george/git-docs/ProjectShule/mysql_root_password.txt
+  mysql_database:
+    file: /home/george/git-docs/ProjectShule/mysql_database.txt
+  mysql_user:
+    file: /home/george/git-docs/ProjectShule/mysql_user.txt
+  mysql_password:
+    file: /home/george/git-docs/ProjectShule/mysql_password.txt

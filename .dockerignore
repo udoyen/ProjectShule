@@ -1,6 +1,8 @@
-server/.gcloudignore
-server/node_modules
 secrets.txt
+.gitignore
+npm-debug.log
+node_modules
+./server/node_modules
 mysql_root_password.txt 
 mysql_user.txt 
 mysql_password.txt 
