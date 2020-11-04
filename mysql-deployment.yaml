@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mysql
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mysql
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mysql
+    spec:
+      containers:
+      - args:
+        - --default-authentication-plugin=mysql_native_password
+        env:
+        - name: MYSQL_DATABASE_FILE
+          value: /run/secrets/mysql_database
+        - name: MYSQL_PASSWORD_FILE
+          value: /run/secrets/mysql_password
+        - name: MYSQL_ROOT_PASSWORD_FILE
+          value: /run/secrets/mysql_root_password
+        - name: MYSQL_USER_FILE
+          value: /run/secrets/mysql_user
+        image: mysql:8.0
+        imagePullPolicy: ""
+        name: shule-db
+        ports:
+        - containerPort: 3306
+        resources: {}
+        volumeMounts:
+        - mountPath: /run/secrets/mysql_root_password
+          name: mysql_root_password
+        - mountPath: /run/secrets/mysql_database
+          name: mysql_database
+        - mountPath: /run/secrets/mysql_user
+          name: mysql_user
+        - mountPath: /run/secrets/mysql_password
+          name: mysql_password
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: mysql_root_password
+        secret:
+          items:
+          - key: mysql_root_password
+            path: mysql_root_password
+          secretName: mysql_root_password
+      - name: mysql_database
+        secret:
+          items:
+          - key: mysql_database
+            path: mysql_database
+          secretName: mysql_database
+      - name: mysql_user
+        secret:
+          items:
+          - key: mysql_user
+            path: mysql_user
+          secretName: mysql_user
+      - name: mysql_password
+        secret:
+          items:
+          - key: mysql_password
+            path: mysql_password
+          secretName: mysql_password
+status: {}

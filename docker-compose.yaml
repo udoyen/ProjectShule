@@ -6,7 +6,7 @@ services:
      ports:
        - "3306:3306"
      command: --default-authentication-plugin=mysql_native_password
-     restart: unless-stopped
+     restart: always
      environment:
         MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
         MYSQL_DATABASE_FILE: /run/secrets/mysql_database
@@ -24,7 +24,7 @@ services:
         dockerfile: Dockerfile
      container_name: shule-backend
      image: shule-backend:backend
-     restart: unless-stopped
+     restart: always
      depends_on:
        - mysql
      links:
