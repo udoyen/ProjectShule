@@ -1,4 +1,4 @@
-//const config = require("dbConfig.json");
+const config = require("dbConfig.json");
 const mysql = require("mysql2/promise");
 const { Sequelize } = require("sequelize");
 
@@ -9,22 +9,20 @@ module.exports = db = {
 };
 
 async function initialize() {
-  // create db if it doesn't already exisT
   const pool = await mysql.createPool({
     host: process.env.MYSQL_HOST,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
     port: process.env.MYSQL_PORT,
     waitForConnections: true,
   });
 
   const ensureSchema = async (pool) => {
     console.log(`Ensured that table ${process.env.MYSQL_DATABASE} exists`);
-    await pool
-      .query(`CREATE DATABASE IF NOT EXISTS ${process.env.MYSQL_DATABASE};`)
-      .catch((err) => {
-        console.log(`Create error: ${err}`);
-      });
+    await pool.query(
+      `CREATE DATABASE IF NOT EXISTS ${process.env.MYSQL_DATABASE};`
+    );
   };
 
   const poolPromise = ensureSchema(pool)
@@ -51,11 +49,12 @@ async function initialize() {
       sequelize.sync();
     })
     .catch((err) => {
-      console.log(`Lower errro: ${err}`);
+      console.log(`Ensure Schema Error: ${err}`);
     });
 
   poolPromise;
-  console.log(`Localhost: ${process.env.MYSQL_HOST}`);
 }
 
-initialize();
+initialize().catch((err) => {
+  console.log(`Initilization Error: ${err}`);
+});
